@@ -1,0 +1,9 @@
+.venv/
+tests/
+audio.wav
+video.mp4
+output.mp4
+audio-test.wav
+final_clean.srt
+script.txt
+audio_ref.txt
