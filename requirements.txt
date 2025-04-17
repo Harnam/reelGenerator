@@ -33,6 +33,7 @@ encodec==0.1.1
 f5-tts==1.1.0
 fastapi==0.115.12
 faster-whisper==1.1.1
+ffmpeg-python==0.2.0
 ffmpy==0.5.0
 filelock==3.18.0
 flatbuffers==25.2.10
@@ -40,6 +41,7 @@ fonttools==4.57.0
 frozendict==2.4.6
 frozenlist==1.5.0
 fsspec==2024.12.0
+future==1.0.0
 gitdb==4.0.12
 GitPython==3.1.44
 google-api-core==2.24.2
