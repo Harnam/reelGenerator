@@ -4,6 +4,11 @@ import random
 import shutil
 import sys
 import ffmpeg
+
+import generateAudio
+import convertAudio
+import generateVideo
+
 # Function to ask user if they want to delete generated files
 def del_files():
     try:
@@ -50,47 +55,17 @@ else:
     print(f"Script file '{script_name}' does not exist. Proceeding with blank script content.")
 
 # Step 1: Generate audio
-print("Generating audio...")
-cmd_tts = f'f5-tts_infer-cli --model F5TTS_v1_Base --ref_audio "{ audio_name }" --ref_text "{ ref_text_content }" --gen_text "{ script_content }" --output_file "genAudio.wav"'
-subprocess.run(cmd_tts, shell=True, check=True)
+generateAudio.run(audio_name, ref_text_content, script_content)
 
 # Step 2: Convert audio
-print("Converting audio...")
-cmd_audio = f'ffmpeg -i "tests/genAudio.wav" -ar 16000 -ac 1 audio-test.wav'
-subprocess.run(cmd_audio, shell=True, check=True)
+convertAudio.run()
 
 # Step 3: Run proper.py
 print("Running proper.py...")
 subprocess.run("python3 proper.py", shell=True, check=True)
 
 # Step 4: Generate random timestamp (0 to 10 minutes)
-# Get the duration of the video file
-video_info = ffmpeg.probe(video_name)
-video_duration = float(video_info['format']['duration'])
-
-# Get the duration of the generated audio file
-audio_info = ffmpeg.probe("tests/genAudio.wav")
-audio_duration = float(audio_info['format']['duration'])
-
-# Calculate the maximum start time
-max_start_time = max(0, video_duration - audio_duration)
-
-# Generate a random timestamp within the valid range
-random_seconds = random.uniform(0, max_start_time)
-hours = int(random_seconds // 3600)
-minutes = int((random_seconds % 3600) // 60)
-seconds = int(random_seconds % 60)
-timestamp = f"{hours:02}:{minutes:02}:{seconds:02}"
-print(f"Generated random timestamp: {timestamp}")
-
-# Step 5: Final ffmpeg command
-print("Combining video and audio...")
-cmd_final = (
-    f'ffmpeg -ss {timestamp} -i "{video_name}" -i "tests/genAudio.wav" '
-    '-vf "subtitles=final_clean.srt" -map 0:v:0 -map 1:a:0 '
-    f'-c:v libx264 -c:a aac -b:a 192k -shortest {output_name}'
-)
-subprocess.run(cmd_final, shell=True, check=True)
+generateVideo.run(video_name, output_name)
 
 if delete_files in ["yes", "y"]:
     del_files()
