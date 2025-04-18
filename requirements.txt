@@ -45,7 +45,10 @@ future==1.0.0
 gitdb==4.0.12
 GitPython==3.1.44
 google-api-core==2.24.2
+google-api-python-client==2.167.0
 google-auth==2.39.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.1
 google-cloud-core==2.4.3
 google-cloud-storage==2.19.0
 google-crc32c==1.7.1
@@ -55,6 +58,7 @@ gradio==5.14.0
 gradio_client==1.7.0
 h11==0.14.0
 httpcore==1.0.8
+httplib2==0.22.0
 httpx==0.28.1
 huggingface-hub==0.27.1
 humanfriendly==10.0
@@ -80,6 +84,7 @@ multiprocess==0.70.16
 networkx==3.4.2
 numba==0.61.2
 numpy==1.26.4
+oauthlib==3.2.2
 omegaconf==2.3.0
 onnxruntime==1.21.0
 orjson==3.10.16
@@ -108,6 +113,7 @@ pytz==2025.2
 PyYAML==6.0.2
 regex==2024.11.6
 requests==2.32.3
+requests-oauthlib==2.0.0
 rich==13.9.4
 rsa==4.9.1
 ruff==0.11.5
@@ -144,6 +150,7 @@ transformers-stream-generator==0.0.5
 typer==0.15.2
 typing_extensions==4.13.2
 tzdata==2025.2
+uritemplate==4.1.1
 urllib3==2.4.0
 uvicorn==0.34.1
 vocos==0.1.0
