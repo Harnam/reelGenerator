@@ -7,3 +7,9 @@ audio-test.wav
 final_clean.srt
 script.txt
 audio_ref.txt
+shorts.json
+
+client_secret.json
+token.json
+
+.DS_Store
