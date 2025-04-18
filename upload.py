@@ -23,7 +23,7 @@ def get_authenticated_service():
             token.write(creds.to_json())
     return build('youtube', 'v3', credentials=creds)
 
-def upload_video(file, title, description, category, keywords, privacy_status):
+def upload_video(file, title, description, category, keywords, privacy_status = 'public'):
     youtube = get_authenticated_service()
     body = {
         'snippet': {

@@ -9,19 +9,7 @@ import generateAudio
 import convertAudio
 import generateVideo
 import generateSubs
-
-# Function to ask user if they want to delete generated files
-def del_files():
-    try:
-        files_to_delete = ["audio-test.wav", "final_clean.srt", "tests/genAudio.wav"]
-        for file in files_to_delete:
-            if os.path.exists(file):
-                os.remove(file)
-                print(f"Deleted {file}")
-            else:
-                print(f"{file} does not exist.")
-    except Exception as e:
-        print(f"Error deleting files: {e}")
+import deleteFiles
 
 # Check if ffmpeg is installed
 if shutil.which("ffmpeg") is None:
@@ -68,7 +56,7 @@ generateSubs.run("audio-test.wav", "final_clean.srt")
 generateVideo.run(video_name, output_name)
 
 if delete_files in ["yes", "y"]:
-    del_files()
+    deleteFiles.run()
 else:
     print("Generated files were not deleted.")
 
