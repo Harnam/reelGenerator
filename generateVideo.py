@@ -1,4 +1,3 @@
-import subprocess
 import random
 import ffmpeg
 
@@ -24,10 +23,19 @@ def run(video_name, output_name):
     print(f"Generated random timestamp: {timestamp}")
 
     # Step 5: Final ffmpeg command
-    print("Combining video and audio...")
-    cmd_final = (
-        f'ffmpeg -ss {timestamp} -i "{video_name}" -i "tests/genAudio.wav" '
-        '-vf "subtitles=final_clean.srt" -map 0:v:0 -map 1:a:0 '
-        f'-c:v libx264 -c:a aac -b:a 192k -shortest {output_name}'
+    ffmpeg.run(
+    ffmpeg
+    .output(
+        ffmpeg.filter_(
+            ffmpeg.input(video_name, ss=timestamp).video,
+            "subtitles",
+            "final_clean.srt"
+        ),
+        ffmpeg.input("tests/genAudio.wav").audio,
+        output_name,
+        vcodec="libx264",
+        acodec="aac",
+        audio_bitrate="192k",
+        shortest=None
     )
-    subprocess.run(cmd_final, shell=True, check=True)
+)
