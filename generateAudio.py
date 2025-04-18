@@ -1,6 +1,14 @@
 import subprocess
+from f5_tts import api
 
 def run(audio_name, ref_text_content, script_content):
-    print("Generating audio...")
-    cmd_tts = f'f5-tts_infer-cli --model F5TTS_v1_Base --ref_audio "{audio_name}" --ref_text "{ref_text_content}" --gen_text "{script_content}" --output_file "genAudio.wav"'
-    subprocess.run(cmd_tts, shell=True, check=True)
+    
+    f5tts = api.F5TTS()
+
+    wav, sr, spect = f5tts.infer(
+        audio_name,
+        ref_text_content,
+        script_content,
+        file_wave="tests/genAudio.wav",
+        seed=100,  # random seed = -1
+    )

@@ -62,7 +62,7 @@ generateAudio.run(audio_name, ref_text_content, script_content)
 convertAudio.run()
 
 # Step 3: Run proper.py
-proper.run("audio-test.wav", "final_clean.srt")
+generateSubs.run("audio-test.wav", "final_clean.srt")
 
 # Step 4: Generate random timestamp (0 to 10 minutes)
 generateVideo.run(video_name, output_name)
