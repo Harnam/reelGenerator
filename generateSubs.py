@@ -12,7 +12,7 @@ def split_sentences(text):
     # Break text into sentences using punctuation
     return re.findall(r'[^.!?]+[.!?]?', text.strip())
 
-def generate_clean_sentence_srt(audio_path, output_path="final_clean.srt", pause_buffer=0.3):
+def run(audio_path, output_path, pause_buffer=0.3):
     model = WhisperModel("base.en", compute_type="auto")
     segments, _ = model.transcribe(audio_path, word_timestamps=True)
 
@@ -78,6 +78,3 @@ def generate_clean_sentence_srt(audio_path, output_path="final_clean.srt", pause
         f.write("\n".join(srt_lines))
 
     print(f"✅ Clean sentence-based, word-highlighted SRT saved to: {output_path}")
-
-# Example usage
-generate_clean_sentence_srt("audio-test.wav")

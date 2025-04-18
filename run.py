@@ -8,6 +8,7 @@ import ffmpeg
 import generateAudio
 import convertAudio
 import generateVideo
+import generateSubs
 
 # Function to ask user if they want to delete generated files
 def del_files():
@@ -35,7 +36,7 @@ ref_text = input("Enter reference audio text (default: audio_ref.txt): ") or "au
 script_name = input("Enter script text filename (default: script.txt): ") or "script.txt"
 output_name = input("Enter output filename (default: output.mp4): ") or "output.mp4"
 
-delete_files = input("Do you want to delete the generated files? (yes/no): ").strip().lower()
+delete_files = input("Do you want to delete the generated files? (yes/no) (default: yes): ").strip().lower() or "yes"
 
 # Read contents of ref_text file
 if os.path.exists(ref_text):
@@ -61,8 +62,7 @@ generateAudio.run(audio_name, ref_text_content, script_content)
 convertAudio.run()
 
 # Step 3: Run proper.py
-print("Running proper.py...")
-subprocess.run("python3 proper.py", shell=True, check=True)
+proper.run("audio-test.wav", "final_clean.srt")
 
 # Step 4: Generate random timestamp (0 to 10 minutes)
 generateVideo.run(video_name, output_name)
